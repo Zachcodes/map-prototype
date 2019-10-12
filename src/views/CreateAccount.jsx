@@ -105,11 +105,6 @@ const CreateAccount = props => {
 };
 
 export default connect(
-  state => {
-    const { user } = state.user;
-    return {
-      user: user,
-    };
-  },
+  ({ user }) => user,
   { setUser }
 )(CreateAccount);

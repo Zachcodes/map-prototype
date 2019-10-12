@@ -1,7 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import FileUpload from '../components/FileUpload';
 
-const Account = () => {
+const Account = ({ user }) => {
   return (
     <div>
       <FileUpload />
@@ -9,4 +10,4 @@ const Account = () => {
   );
 };
 
-export default Account;
+export default connect(({ user }) => user)(Account);

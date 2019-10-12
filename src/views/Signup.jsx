@@ -17,16 +17,17 @@ const Signup = props => {
       <Formik
         initialValues={initialValues}
         onSubmit={async (values, { setSubmitting }) => {
-          console.log(props.user);
-          console.log({ ...values, business_id: props.user.business.id });
-          // try {
-          //   const { data } = await axios.post('/api/signup', {...values, business_id: props.user.business.id});
-          //   props.setUser({ ...props.user, ...data });
-          //   props.history.push('/account');
-          // } catch (err) {
-          //   console.error(err);
-          //   setSubmitting(false);
-          // }
+          try {
+            const { data } = await axios.post('/api/signup', {
+              ...values,
+              business_id: props.user.business.id,
+            });
+            props.setUser({ ...props.user, ...data });
+            props.history.push('/account');
+          } catch (err) {
+            console.error(err);
+            setSubmitting(false);
+          }
         }}
       >
         {({ isSubmitting, values, handleChange }) => (
@@ -60,11 +61,6 @@ const Signup = props => {
 };
 
 export default connect(
-  state => {
-    const { user } = state.user;
-    return {
-      user,
-    };
-  },
+  ({ user }) => user,
   { setUser }
 )(Signup);
