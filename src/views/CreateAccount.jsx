@@ -1,6 +1,9 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
+import { useAxios } from '../customHooks/httpUtils';
+import { connect } from 'react-redux';
+import { setUser } from '../redux/actions';
 
 const initialValues = {
   business_name: '',
@@ -10,18 +13,20 @@ const initialValues = {
   mailing_city: '',
   mailing_state: '',
   website: '',
-  primary_industry: '',
+  primary_industry_id: 0,
   company_logo_url: '',
 };
 
 const CreateAccount = props => {
+  const [industries] = useAxios('/api/industries');
   return (
     <div>
       <Formik
         initialValues={initialValues}
         onSubmit={async (values, { setSubmitting }) => {
           try {
-            await axios.post('/api/createAccount', values);
+            const { data } = await axios.post('/api/createAccount', values);
+            props.setUser({ ...props.user, business: data });
             props.history.push('/signup');
           } catch (err) {
             setSubmitting(false);
@@ -73,12 +78,16 @@ const CreateAccount = props => {
               onChange={handleChange}
               value={values.website}
             />
-            <Field
-              type="text"
-              name="primary_industry"
-              onChange={handleChange}
-              value={values.primary_industry}
-            />
+            <Field component="select" name="primary_industry_id">
+              <option value=""></option>
+              {industries.map(i => {
+                return (
+                  <option key={i.id} value={i.id}>
+                    {i.industry_name}
+                  </option>
+                );
+              })}
+            </Field>
             <Field
               type="text"
               name="company_logo_url"
@@ -95,4 +104,12 @@ const CreateAccount = props => {
   );
 };
 
-export default CreateAccount;
+export default connect(
+  state => {
+    const { user } = state.user;
+    return {
+      user: user,
+    };
+  },
+  { setUser }
+)(CreateAccount);

@@ -2,7 +2,10 @@ module.exports = {
   async createAccount(req, res, next) {
     const db = req.app.get('db');
     try {
-      const newAccount = await db.business.insert(req.body);
+      const newAccount = await db.business.insert({
+        ...req.body,
+        primary_industry_id: Number(req.body.primary_industry_id),
+      });
       res.send(newAccount);
     } catch (err) {
       next(err);

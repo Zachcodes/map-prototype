@@ -15,8 +15,10 @@
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "react-dropzone": "^10.1.10",
+    "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.1",
     "react-scripts": "^3.1.2",
+    "redux": "^4.0.4",
     "styled-components": "^4.4.0"
   },
   "scripts": {
@@ -24,7 +26,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "concurrently \"nodemon\" \"react-scripts start\""
+    "dev": "concurrently \"nodemon\" \"PORT=3500 react-scripts start\""
   },
   "eslintConfig": {
     "extends": "react-app"

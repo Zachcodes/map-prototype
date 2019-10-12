@@ -1,6 +1,8 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { setUser } from '../redux/actions';
 
 const initialValues = {
   username: '',
@@ -15,16 +17,16 @@ const Signup = props => {
       <Formik
         initialValues={initialValues}
         onSubmit={async (values, { setSubmitting }) => {
-          try {
-            await axios.post('/api/signup', {
-              username: values.username,
-              password: values.password,
-            });
-            props.history.push('/account');
-          } catch (err) {
-            console.error(err);
-            setSubmitting(false);
-          }
+          console.log(props.user);
+          console.log({ ...values, business_id: props.user.business.id });
+          // try {
+          //   const { data } = await axios.post('/api/signup', {...values, business_id: props.user.business.id});
+          //   props.setUser({ ...props.user, ...data });
+          //   props.history.push('/account');
+          // } catch (err) {
+          //   console.error(err);
+          //   setSubmitting(false);
+          // }
         }}
       >
         {({ isSubmitting, values, handleChange }) => (
@@ -57,4 +59,12 @@ const Signup = props => {
   );
 };
 
-export default Signup;
+export default connect(
+  state => {
+    const { user } = state.user;
+    return {
+      user,
+    };
+  },
+  { setUser }
+)(Signup);

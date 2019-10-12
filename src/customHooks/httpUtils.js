@@ -10,10 +10,10 @@ export const useAxios = (
   const [data, setData] = useState(initialData);
   useEffect(() => {
     async function getData() {
-      const { data } = await axios(url, method, body);
+      const { data } = await axios(url, { method, body });
       setData(data);
     }
     getData();
   }, [url, method, body]);
-  return data;
+  return [data, setData];
 };
