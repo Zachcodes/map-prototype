@@ -2,8 +2,11 @@ require('dotenv').config({ path: `${__dirname}/../.env` });
 const express = require('express');
 const massive = require('massive');
 const uc = require('./controllers/usersController');
+const ac = require('./controllers/accountController');
+const mc = require('./controllers/mapController');
+const utilC = require('./controllers/utilController');
 
-const { CONNECTION_STRING } = process.env;
+const { CONNECTION_STRING, PORT } = process.env;
 
 const app = express();
 
@@ -15,37 +18,15 @@ massive(CONNECTION_STRING)
   })
   .catch(err => console.log('Error logging in to database', err));
 
-// Users routes
-app.post('/api/createAccount', uc.createAccount);
+// Account creation routes
+app.get('/api/industries', ac.getIndustries);
+app.post('/api/createAccount', ac.createAccount);
 app.post('/api/signup', uc.signup);
 
-app.get('/api/coordinates', async (req, res) => {
-  const db = req.app.get('db');
-  const coordinates = await db.coordinates.getCoordinates();
-  res.send(coordinates);
-});
+// Map routes
+app.get('/api/coordinates', mc.getCoordinates);
 
-app.post('/api/industry', async (req, res) => {
-  const db = req.app.get('db');
-  let industries = req.body.industries;
-  const mapped = industries.map(i => {
-    return {
-      industry_name: i,
-      api_name: createApiName(i),
-    };
-  });
-  await db.primary_industry.insert(mapped);
-  res.sendStatus(200);
-});
+// Util routes
+app.post('/api/industry', utilC.createIndustries);
 
-function createApiName(i) {
-  const stripped = i.replace(/[/'-]/g, '');
-  const split = stripped.toLowerCase().split(' ');
-  const added = split.map((s, i) => {
-    let add = i === split.length - 1 ? s : (s += '_');
-    return add;
-  });
-  return added.join('');
-}
-
-app.listen(4000, () => console.log('Listening on port 4000'));
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
