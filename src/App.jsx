@@ -1,9 +1,15 @@
-import React from 'react'
-import SimpleMap from './components/SimpleMap'
-import './App.css'
+import React from 'react';
+import routes from './routes';
+import Navbar from './components/Navbar';
+import './App.css';
 
 function App() {
-  return <SimpleMap />
+  return (
+    <>
+      <Navbar />
+      {routes}
+    </>
+  );
 }
 
-export default App
+export default App;
