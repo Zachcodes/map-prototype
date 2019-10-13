@@ -42,6 +42,8 @@ create table if not exists coordinates (
     lat text,
     lng text,
     description text,
-    business_id integer references business(id)
+    business_id integer references business(id),
+    date_of_service text,
+    active boolean DEFAULT false
 )
 

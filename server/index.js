@@ -4,6 +4,7 @@ const massive = require('massive');
 const uc = require('./controllers/usersController');
 const ac = require('./controllers/accountController');
 const mc = require('./controllers/mapController');
+const fc = require('./controllers/fileController');
 const utilC = require('./controllers/utilController');
 
 const { CONNECTION_STRING, PORT } = process.env;
@@ -25,6 +26,9 @@ app.post('/api/signup', uc.signup);
 
 // Map routes
 app.get('/api/coordinates', mc.getCoordinates);
+
+// File routes
+app.post('/api/files', fc.uploadCsv);
 
 // Util routes
 app.post('/api/industry', utilC.createIndustries);
