@@ -23,9 +23,10 @@ export const setHeight = ({ height, maxHeight }) => {
   return concat;
 };
 
-export const setWidth = ({ width, maxWidth }) => {
+export const setWidth = ({ width, maxWidth, minWidth }) => {
   let concat = '';
   width && (concat += `width: ${width};`);
   maxWidth && (concat += `max-width: ${maxWidth};`);
+  minWidth && (concat += `min-width: ${minWidth};`);
   return concat;
 };

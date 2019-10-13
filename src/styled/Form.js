@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { Form } from 'formik';
-import { setWidth } from '../utils/styledFunctions';
+import { setWidth, setFlex } from '../utils/styledFunctions';
 
 const StyledForm = styled(Form)`
   ${setWidth}
+  ${setFlex}
 `;
 
 export const Label = styled.label`

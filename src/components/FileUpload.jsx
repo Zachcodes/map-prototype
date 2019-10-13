@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { UploadButton } from '../styled/Button';
 import axios from 'axios';
 
 function FileUpload() {
@@ -17,12 +18,10 @@ function FileUpload() {
 
   return (
     <div {...getRootProps()}>
-      <input {...getInputProps()} />
-      {isDragActive ? (
-        <p>Drop the files here ...</p>
-      ) : (
-        <p>Drag 'n' drop some files here, or click to select files</p>
-      )}
+      <UploadButton>
+        <input {...getInputProps()} />
+        {isDragActive ? <p>Upload CSV data</p> : <p>Upload CSV data</p>}
+      </UploadButton>
     </div>
   );
 }
