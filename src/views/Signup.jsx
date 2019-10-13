@@ -1,8 +1,10 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, ErrorMessage } from 'formik';
+import { FormInput } from '../styled/Input';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { setUser } from '../redux/actions';
+import Button from '../styled/Button';
 
 const initialValues = {
   username: '',
@@ -13,7 +15,6 @@ const initialValues = {
 const Signup = props => {
   return (
     <div>
-      <h1>Signup</h1>
       <Formik
         initialValues={initialValues}
         onSubmit={async (values, { setSubmitting }) => {
@@ -32,27 +33,28 @@ const Signup = props => {
       >
         {({ isSubmitting, values, handleChange }) => (
           <Form>
-            <Field
+            <FormInput
               type="text"
               name="username"
               value={values.username}
               onChange={handleChange}
             />
-            <Field
+            <FormInput
               type="password"
               name="password"
               value={values.password}
               onChange={handleChange}
             />
-            <Field
+            <FormInput
               type="password"
               name="confirmPassword"
               value={values.confirmPassword}
               onChange={handleChange}
             />
-            <button type="submit" disabled={isSubmitting}>
-              Submit
-            </button>
+            <Button type="submit" disabled={isSubmitting}>
+              Create Account
+            </Button>
+            <Button>Back</Button>
           </Form>
         )}
       </Formik>
