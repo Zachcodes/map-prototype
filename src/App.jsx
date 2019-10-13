@@ -4,8 +4,17 @@ import Navbar from './components/Navbar';
 import styled from 'styled-components';
 import './App.css';
 
+function App() {
+  return (
+    <MainContainer>
+      <Navbar />
+      {routes}
+    </MainContainer>
+  );
+}
+
 const MainContainer = styled.div`
-  min-height: 100vh;
+  height: 100%;
   ::after {
     content: '';
     background: url('https://video-images.vice.com/articles/5c61451b72f8f400077b3cdf/lede/1549878717939-Screen-Shot-2019-02-11-at-45130-PM.png?crop=0.9579735175590098xw%3A1xh%3Bcenter%2Ccenter&resize=2000%3A*')
@@ -23,14 +32,5 @@ const MainContainer = styled.div`
     z-index: -1;
   }
 `;
-
-function App() {
-  return (
-    <MainContainer>
-      <Navbar />
-      {routes}
-    </MainContainer>
-  );
-}
 
 export default App;

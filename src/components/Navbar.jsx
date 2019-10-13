@@ -17,5 +17,6 @@ const HeaderContainer = styled.header`
   display: flex;
   justify-content: flex-end;
   padding: 15px 30px;
+  height: 60px;
 `;
 export default Navbar;
