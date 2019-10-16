@@ -17,3 +17,22 @@ export const StyledLink = styled(Link)`
     color: #494949;
   }
 `;
+
+export const LinkButton = styled(Link)`
+  width: 217px;
+  height: 86px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #cc4343;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 1.42px;
+  color: #ffffff;
+  outline: none;
+  text-decoration: none;
+  :hover {
+    cursor: pointer;
+  }
+`;

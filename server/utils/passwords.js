@@ -3,7 +3,7 @@ const moment = require('moment');
 const saltRounds = Number(process.env.SALT_ROUNDS);
 
 module.exports = {
-  async createPassword(plainTextPassword, calcTime = false) {
+  async createHash(plainTextPassword, calcTime = false) {
     let saltStart, saltEnd, hashStart, hashEnd;
     calcTime && (saltStart = moment());
     const salt = await bcrypt.genSalt(saltRounds);

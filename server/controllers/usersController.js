@@ -1,4 +1,4 @@
-const { createPassword } = require('../utils/passwords');
+const { createHash } = require('../utils/passwords');
 const User = require('../classes/User');
 
 module.exports = {
@@ -6,7 +6,7 @@ module.exports = {
     const db = req.app.get('db');
     console.log('session in signup', req.session);
     try {
-      const hashedPassword = await createPassword(req.body.password, true);
+      const hashedPassword = await createHash(req.body.password, true);
       const newUser = await db.users.insert({
         ...req.body,
         password: hashedPassword,

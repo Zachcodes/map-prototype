@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Navbar = () => {
   return (
     <HeaderContainer>
-      <StyledLink margin="0 24 0 0" to="/create-account">
+      <StyledLink margin="0 24 0 0" to="/login">
         Sign in
       </StyledLink>
       <StyledLink to="/services">Find services</StyledLink>
