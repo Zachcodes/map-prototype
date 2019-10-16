@@ -6,6 +6,7 @@ module.exports = {
         ...req.body,
         primary_industry_id: Number(req.body.primary_industry_id),
       });
+      req.session.business = newAccount;
       res.send(newAccount);
     } catch (err) {
       next(err);

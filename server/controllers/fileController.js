@@ -6,6 +6,7 @@ const Coordinate = require('../classes/Coordinate');
 module.exports = {
   async uploadCsv(req, res, next) {
     const db = req.app.get('db');
+    const businessId = req.session.business.id ? req.session.business.id : 14;
     const output = [];
     var form = new formidable.IncomingForm();
     try {
@@ -19,7 +20,9 @@ module.exports = {
           parser.on('readable', function() {
             let record;
             while ((record = parser.read())) {
-              output.push(new Coordinate(record));
+              output.push(
+                new Coordinate({ ...record, business_id: businessId })
+              );
             }
           });
 

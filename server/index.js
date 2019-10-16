@@ -6,12 +6,18 @@ const ac = require('./controllers/accountController');
 const mc = require('./controllers/mapController');
 const fc = require('./controllers/fileController');
 const utilC = require('./controllers/utilController');
+const initSession = require('./middleware/initSession');
+const setSession = require('./utils/setSession');
 
 const { CONNECTION_STRING, PORT } = process.env;
 
 const app = express();
 
+app.use(setSession);
+
 app.use(express.json());
+
+app.use(initSession);
 
 massive(CONNECTION_STRING)
   .then(dbInstance => {

@@ -2,6 +2,7 @@ const moment = require('moment');
 
 module.exports = class Coordinate {
   constructor(csvData) {
+    console.log(csvData);
     this.address = csvData.address;
     this.lat = Number(csvData.lat);
     this.lng = Number(csvData.lng);
