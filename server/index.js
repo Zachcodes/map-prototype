@@ -33,6 +33,7 @@ app.post('/api/signup', uc.signup);
 
 // Auth routes
 app.post('/api/login', auc.login);
+app.delete('/api/logout', auc.logout);
 
 // Map routes
 app.get('/api/coordinates', mc.getCoordinates);

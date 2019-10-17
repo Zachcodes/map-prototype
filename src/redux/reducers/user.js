@@ -3,11 +3,11 @@ import { SET_USER } from '../actionTypes';
 const initialState = {
   user: {
     business: {},
+    loggedIn: false,
   },
 };
 
 export default function(state = initialState, action) {
-  console.log(action);
   switch (action.type) {
     case SET_USER: {
       return {

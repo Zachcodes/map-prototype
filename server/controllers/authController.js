@@ -15,4 +15,8 @@ module.exports = {
       next(err);
     }
   },
+  async logout(req, res) {
+    req.session.destroy();
+    res.sendStatus(200);
+  },
 };
