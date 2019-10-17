@@ -5,12 +5,14 @@ export const useAxios = (
   url,
   method = 'get',
   body = null,
-  initialData = []
+  initialData = [],
+  cb
 ) => {
   const [data, setData] = useState(initialData);
   useEffect(() => {
     async function getData() {
       const { data } = await axios(url, { method, body });
+      if (cb) cb(data);
       setData(data);
     }
     getData();

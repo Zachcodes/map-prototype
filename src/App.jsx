@@ -2,9 +2,23 @@ import React from 'react';
 import routes from './routes';
 import Navbar from './components/Navbar';
 import styled from 'styled-components';
+import { useAxios } from './customHooks/httpUtils';
+import { setUser } from './redux/actions';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import './App.css';
 
-function App() {
+function App({ setUser, history }) {
+  function seedRedux(data) {
+    setUser({
+      ...data.user,
+      business: data.business,
+      loggedIn: data.loggedIn,
+    });
+    data.loggedIn && history.push('/account');
+  }
+  useAxios('/api/session', 'get', null, {}, seedRedux);
+
   return (
     <MainContainer>
       <Navbar />
@@ -33,4 +47,9 @@ const MainContainer = styled.div`
   }
 `;
 
-export default App;
+export default withRouter(
+  connect(
+    null,
+    { setUser }
+  )(App)
+);
