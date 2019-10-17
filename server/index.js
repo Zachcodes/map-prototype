@@ -3,6 +3,7 @@ const express = require('express');
 const massive = require('massive');
 const uc = require('./controllers/usersController');
 const ac = require('./controllers/accountController');
+const auc = require('./controllers/authController');
 const mc = require('./controllers/mapController');
 const fc = require('./controllers/fileController');
 const utilC = require('./controllers/utilController');
@@ -29,6 +30,9 @@ massive(CONNECTION_STRING)
 app.get('/api/industries', ac.getIndustries);
 app.post('/api/createAccount', ac.createAccount);
 app.post('/api/signup', uc.signup);
+
+// Auth routes
+app.post('/api/login', auc.login);
 
 // Map routes
 app.get('/api/coordinates', mc.getCoordinates);

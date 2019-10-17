@@ -15,4 +15,7 @@ module.exports = {
     calcTime && console.log('hash calc time', hashEnd.diff(hashStart));
     return hash;
   },
+  async compare(plainText, hashed) {
+    return await bcrypt.compare(plainText, hashed);
+  },
 };
