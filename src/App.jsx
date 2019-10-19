@@ -17,7 +17,7 @@ function App({ setUser, history }) {
     });
     data.loggedIn && history.push('/account');
   }
-  useAxios('/api/session', 'get', null, {}, seedRedux);
+  useAxios({ url: '/api/session' }, seedRedux);
 
   return (
     <MainContainer>

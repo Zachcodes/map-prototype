@@ -6,6 +6,7 @@ export const StyledLink = styled(Link)`
   color: #494949;
   font-size: 20px;
   font-weight: bold;
+  padding: 10px 0;
   ${({ margin = '' }) =>
     margin
       ? `margin: ${margin
@@ -13,6 +14,8 @@ export const StyledLink = styled(Link)`
           .map(m => `${m}px`)
           .join(' ')};`
       : ''}
+  ${({ active }) =>
+    active ? 'border-bottom: 3px solid #494949' : ''}
   :visited {
     color: #494949;
   }
