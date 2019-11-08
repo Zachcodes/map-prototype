@@ -1,4 +1,8 @@
 const { compare } = require('../utils/passwords');
+const {
+  stripSession,
+  stripSensitiveUserValues,
+} = require('../utils/formatting');
 
 module.exports = {
   async login(req, res, next) {
@@ -8,9 +12,11 @@ module.exports = {
       if (!user) return res.status(404).send('No user found by that email');
       if (!(await compare(req.body.password, user.password)))
         return res.status(401).send('Username/password combination failed');
-      req.session.user = user;
+      const [business] = await db.business.find({ id: user.business_id });
+      req.session.business = business;
+      req.session.user = stripSensitiveUserValues(user);
       req.session.loggedIn = true;
-      res.send(req.session);
+      res.send(stripSession(req.session));
     } catch (err) {
       next(err);
     }
