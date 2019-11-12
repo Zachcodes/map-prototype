@@ -26,6 +26,6 @@ module.exports = {
     res.sendStatus(200);
   },
   getSession(req, res) {
-    res.send(req.session);
+    res.send(stripSession(req.session));
   },
 };
