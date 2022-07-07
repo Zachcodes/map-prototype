@@ -16,7 +16,7 @@
     "formik": "^1.5.8",
     "google-map-react": "^1.1.5",
     "massive": "^6.1.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "prettier": "^1.18.2",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
